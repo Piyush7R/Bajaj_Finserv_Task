@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bajaj Finserv Test</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <h1>Bajaj Finserv Test</h1>
+
+        <p>Enter node relationships separated by commas</p>
+
+        <textarea
+            id="nodeInput"
+            rows="8"
+            placeholder="Example: A->B, A->C, B->D"
+        ></textarea>
+
+        <button onclick="submitData()">Submit</button>
+
+        <div id="errorBox"></div>
+
+        <pre id="resultBox"></pre>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
