@@ -22,7 +22,7 @@ function isValidEdge(edge) {
     const [parent, child] = edge.split("->");
 
     if (parent === child) {
-        return false; // self-loop invalid
+        return false; 
     }
 
     return true;
@@ -110,7 +110,6 @@ app.post("/bfhl", (req, res) => {
             if (!duplicate_edges.includes(edge)) {
                 duplicate_edges.push(edge);
             }
-            // Skip duplicate edges - only process first occurrence
             continue;
         }
 
@@ -118,8 +117,6 @@ app.post("/bfhl", (req, res) => {
 
         let [parent, child] = edge.split("->");
 
-        // multi-parent rule:
-        // first parent wins
         if (childParent[child]) {
             continue;
         }
@@ -150,7 +147,6 @@ app.post("/bfhl", (req, res) => {
 
     roots.sort();
 
-    // Find all nodes that are part of cycles
     let cycleRoots = new Set();
     let cycleNodes = new Set();
     
@@ -173,7 +169,6 @@ app.post("/bfhl", (req, res) => {
 
     console.log('cycleRoots:', cycleRoots);
 
-    // Handle nodes that are part of cycles but have no root (all nodes in cycle have parents)
     let orphanCycles = [];
     for (let node of cycleNodes) {
         if (!roots.includes(node)) {
@@ -187,7 +182,6 @@ app.post("/bfhl", (req, res) => {
     let largest_tree_root = "";
     let maxDepthFound = 0;
 
-    // Add cycle roots that have no parent
     for (let root of roots) {
         if (cycleRoots.has(root)) {
             hierarchies.push({
@@ -227,10 +221,8 @@ app.post("/bfhl", (req, res) => {
         }
     }
 
-    // Add orphan cycles (cycles where no node is a root)
     orphanCycles.sort();
     for (let node of orphanCycles) {
-        // Only add one entry per cycle (the first node encountered)
         if (!hierarchies.some(h => h.root === node && h.has_cycle)) {
             hierarchies.push({
                 root: node,
