@@ -1,4 +1,5 @@
-const API_URL = "http://localhost:3000/bfhl";
+const API_URL = "https://bajaj-finserv-task-0k9x.onrender.com/bfhl";
+
 
 async function submitData() {
     const input = document.getElementById("nodeInput").value;
